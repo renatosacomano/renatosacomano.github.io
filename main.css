@@ -1,32 +1,67 @@
+:root{
+    --maxwidth:940px;
+    --minblockheight:600px;
+
+    --noteminwidth:250px;
+    --notemaxwidth:280px;
+    --noteheight:400px;
+
+    --colora: #000811;
+    --colorb: #253344AA;
+    --fontcolor:white;
+    --fontcolor2:black;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
 
 body{
     display: flex;
-    
+    color: var(--fontcolor);
     font-size: 1em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #000811;
+    background-color: var(--colora);
     background-image: url(images/spaceTile.png);
     background-size: 256px;
     background-repeat: repeat;
-
+    background-attachment: fixed;
     justify-content: center;
 }
 
+a, a:link, a:hover,a:active{
+    text-decoration: none;
+    color: inherit;
+}
+
 h1{
+    font-size: 2.0em;
+}
+
+p{
     font-size: 1.5em;
+}
+
+.color2{
+    background-color: var(--colorb);
+    backdrop-filter: blur(1px);
+}
+
+.headerSection{
+    flex-direction: column;
 }
 
 .pageContainer{
     display: flex;
+    width:100%;
     flex-direction: column;
 }
 
 .header{
     display: flex;
     min-height: 2em;
-    background-color: white;
-    padding: 0.5em;
-    
+    margin-top: 1em;
     justify-content: flex-end;
     align-items: flex-end;
     margin-bottom: 1em;
@@ -56,7 +91,7 @@ h1{
     height: 3em;
     max-width: 3em;
     max-height: 3em;
-    
+
 }
 
 .generalStyle{
@@ -80,7 +115,53 @@ h1{
 
 .boxMin{
     width: 100%;
-    min-height: 15em;
+    min-height: var(--minblockheight);
+}
+
+.section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height: fit-content;
+    overflow-x: hidden;
+}
+
+.fp_img{
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    animation: slideshow 8s linear;
+    animation: slideshow 20s linear infinite 1s;
+    animation-timing-function: ease-in-out;
+    backface-visibility: hidden;
+    background-image: url(images/beach.jpg) url(images/pan1.jpg) url(images/pan2.jpg);
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin-bottom: 6em;
+    text-shadow: 0px 0px 4px black;
+    width:100%;
+    stroke: black;
+    stroke-width: 1em;
+}
+
+.boxDesc{
+    display: flex;
+    align-items: flex-end;
+}
+
+@keyframes slideshow {
+    0%{background-image: url(images/beach.jpg);}
+    23%{background-image: url(images/beach.jpg);}
+    33%{background-image: url(images/pan1.jpg);}
+    56%{background-image: url(images/pan1.jpg);}
+    66%{background-image: url(images/pan2.jpg);}
+    90%{background-image: url(images/pan2.jpg);}
+    100%{background-image: url(images/beach.jpg);}
 }
 
 .horizontalContainer{
@@ -92,25 +173,44 @@ h1{
 
 .boxMax{
     width: 100%;
-    max-width: 800px;
+    max-width: var(--maxwidth);
 }
 
-.squareFloatingBox{
+.FloatingBox{
     flex-grow: 1;
     display: flex;
-    
+    color:var(--fontcolor2);
+    margin-top: 1em;
+    margin-bottom: 1em;
     min-width: 250px;
     min-height: 250px;
     justify-content: center;
     align-items: center;
 }
 
-.squareFloatingBox div{
+.FloatingBox div{
     display: flex;
+    flex-direction: column;
+    border: 0.5em solid white;
+
     border-radius: 1em;
-    padding: 1em;
+    
     background-color: white;
-    width: 12em;
-    height: 12em;
-    justify-content: center;
+    width: var(--noteminwidth);
+    height: var(--noteheight);
+    
+    align-items: center;
+
+    overflow:hidden;
+}
+
+.FloatingBoxImg{
+    max-height: 70%;
+    flex: 2;
+}
+
+.FloatingBoxTxt{
+    margin-top: 1em;
+    flex: 1;
+    text-align: center;
 }
