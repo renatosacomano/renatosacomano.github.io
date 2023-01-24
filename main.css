@@ -1,0 +1,116 @@
+
+body{
+    display: flex;
+    
+    font-size: 1em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #000811;
+    background-image: url(images/spaceTile.png);
+    background-size: 256px;
+    background-repeat: repeat;
+
+    justify-content: center;
+}
+
+h1{
+    font-size: 1.5em;
+}
+
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    display: flex;
+    min-height: 2em;
+    background-color: white;
+    padding: 0.5em;
+    
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 1em;
+}
+
+.headerPadding{
+    flex-grow: 5;
+}
+
+.headerItem{
+    flex-grow: 1;
+}
+
+.headerPortrait{
+    display: flex;
+    border-radius: 50%;
+    min-height: 2em;
+    min-width: 2em;
+    overflow: hidden;
+    justify-content: center;
+    align-content: center;
+    
+}
+
+.headerPortrait img{
+    width: 3em;
+    height: 3em;
+    max-width: 3em;
+    max-height: 3em;
+    
+}
+
+.generalStyle{
+    display: flex;
+
+    flex-direction: column;
+    background-color: #000811EE;
+    color: white;
+
+    justify-content: center;
+    text-align: center;
+}
+
+.centerMedia{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+}
+
+.boxMin{
+    width: 100%;
+    min-height: 15em;
+}
+
+.horizontalContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.boxMax{
+    width: 100%;
+    max-width: 800px;
+}
+
+.squareFloatingBox{
+    flex-grow: 1;
+    display: flex;
+    
+    min-width: 250px;
+    min-height: 250px;
+    justify-content: center;
+    align-items: center;
+}
+
+.squareFloatingBox div{
+    display: flex;
+    border-radius: 1em;
+    padding: 1em;
+    background-color: white;
+    width: 12em;
+    height: 12em;
+    justify-content: center;
+}
