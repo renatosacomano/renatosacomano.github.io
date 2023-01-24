@@ -45,8 +45,10 @@ p{
 
 .color2{
     background-color: var(--colorb);
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(2px);
 }
+
+
 
 .headerSection{
     flex-direction: column;
@@ -78,19 +80,18 @@ p{
 .headerPortrait{
     display: flex;
     border-radius: 50%;
-    min-height: 2em;
-    min-width: 2em;
+    min-height: 3em;
+    min-width: 3em;
     overflow: hidden;
     justify-content: center;
     align-content: center;
+    margin-right: 2em;
     
 }
 
 .headerPortrait img{
-    width: 3em;
-    height: 3em;
-    max-width: 3em;
-    max-height: 3em;
+    width: 3.5em;
+    height: 3.5em;
 
 }
 
@@ -188,14 +189,14 @@ p{
     align-items: center;
 }
 
-.FloatingBox div{
+.FloatingBoxDiv{
     display: flex;
     flex-direction: column;
-    border: 0.5em solid white;
+    border: 0.5em solid #FFFFFF00;
 
     border-radius: 1em;
     
-    background-color: white;
+    background-color: #FFFFFFDD;
     width: var(--noteminwidth);
     height: var(--noteheight);
     
@@ -212,5 +213,6 @@ p{
 .FloatingBoxTxt{
     margin-top: 1em;
     flex: 1;
+    background-color: transparent;
     text-align: center;
 }
