@@ -11,17 +11,13 @@
     <body>
         <div style = "background-image: url(images/beach.jpg); animation: slideshow 1s linear 1 0s; display:block; position: absolute;"></div>
         <div class = "pageContainer">
-           
-            
 
             <section class = "section fp_img headerSection" id="firstpage">
                 
                 <div class ="section color2">
                     <div class = "header boxMax">
-                        <div class = "headerPadding"></div>
-                        <a class = "headerItem" href = "#top">Arte Vetorial</a>
-                        <a class = "headerItem">Ilustrações</a>
-                        <a class = "headerItem">Modelos 3D</a>
+                        <a class = "headerItem" href="#sobre">Sobre</a>
+                        <a class = "headerItem">Contato</a>
                         <a class = "headerItem">Jogos</a>
                         <a class = "headerPortrait" href="index.html"><img src="images/Euquad.jpg"/></a>
                         
@@ -31,24 +27,36 @@
                 <div class="boxMin boxMax boxDesc">
                     <div class = "description">
                         <h1>Renato Sacomano da Cruz</h1>
-                        <p>Freelancer</p>
+                        <h2>Computação Gráfica e Programação<br>Freelancer</h2>
+                        
                     </div>
                 </div>
             </section>
 
             <section class="section">
                 <div class = "boxMin horizontalContainer boxMax">
-                    <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/beach.jpg"/><div class="FloatingBoxTxt">Esse é um texto de exemplo. ficou bom?</div></div></div>
-                    <div class = "FloatingBox"><div class = "FloatingBoxDiv">conteúdo</div></div>
+                    <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/banner3d.jpg"/><div class="FloatingBoxTxt">Modelos 3D sob medida para qualquer projeto.</div></div></div>
+                    <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/bannerjs.jpg"/><div class="FloatingBoxTxt">Quer aprender a programar?<br>Python, javascript, C ou Rust.</div></div></div>
                     <div class = "FloatingBox"><div class = "FloatingBoxDiv">conteúdo</div></div>
                     
                 </div>
             </section>
 
 
-            <section class="section">
-                <div class = "foo boxMin boxMax">
-                    contato
+            <section class="section about" id="sobre">
+                <div class = "boxMin boxMax">
+                    <h1 style="text-align: center; margin-top: 1em;">Sobre</h1>
+                    <p>Sou um programador e desenvolvedor de jogos autodidata. Comecei a programar aos 14 anos. Nessa época programava em visual basic e delphi. Criava planilhas dinâmicas de excel tentando simular jogos geralmente de tabuleiro usando vba. Era uma brincadeira, um passa tempo, eu não tinha os recursos necessários na época para aprender algo mais útil. Quando conheci o delphi comecei a brincar de criar aplicações sobre qualquer coisa inútil, como por exemplo, um "botão troll" escrito fechar quqe muda de lugar quando o mouse passa em cima.</p>
+                    <p>Em 2008 trabalhei como jovem aprendiz na gráfica da editora abril no setor de garantia de qualidade. Lá eu aprendi sobre o processo gráfico e gerenciamento de cores enquanto estudava impressão offset no SENAI de artes gráficas.</p>
+                    <p>Alguns anos depois entrei para uma gráfica de sublimação e embalagens para trabalhar na pré-impressão com processamento de imagens para transfer sublimático, diagramação de arte de embalagens e oportunamente criar artes para os clientes. Nesse momento dominei softwares gráficos como Photoshop, Corel Draw, illustrator e inDesign. Além de auxiliar na manutenção do gerenciamento de cores usando meu conhecimento prévio.</p>
+                    <p>Hoje decidi seguir outro caminho: Desenvolvimento de Jogos. Estou há 2 anos aprendendo as técnicas necessárias de modelagem 3D, pixel art, animação e programação, e em breve espero publicar meu primeiro jogo. E enquanto isso não acontece faço Freelancer!</p>
+                </div>
+            </section>
+
+            <section class="section pacman" id="jogos">
+                <div style = "height: 100%;"class = "boxMin boxMax">
+                        <iframe id = "gamewin" style="display:flex; width:100%;height: 100%;background-color: transparent;" allowtransparency = 'true' src="extra/pacman.html" frameborder="0"></iframe>
+                        <a href="#gamewin" onclick= "document.getElementById('gamewin').src = document.getElementById('gamewin').src;">REFRESH</a>
                 </div>
             </section>
         </div>

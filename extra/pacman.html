@@ -1,0 +1,542 @@
+<html>
+	<header>
+		<title>Come Come</title>
+		<style>
+			body{
+				background:none transparent;
+			}
+			.canv{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 800px;
+				height: 800px;
+				background-color: black;
+				overflow:hidden;
+				transform: translate(-50%,-50%) scale(0.75);
+			}
+
+			.pacman_box{
+				position:absolute;
+				top:0;
+				left: 0;
+				width: 64px;
+				height: 64px;
+
+			}
+			.pacman{
+				position:absolute;
+				top:50%;
+				left: 50%;
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				background-color: #FFCC00;
+
+				transform: translate(-50%,-50%);
+			}
+
+			.pacmouth{
+				position: relative;
+				top:0;
+				left:0;
+				width: 0;
+				height: 0;
+				border-top: 25px solid transparent;
+				border-bottom: 25px solid transparent;
+				border-left: 25px solid transparent;
+				border-right: 26px solid black;
+
+				animation: none;
+			}
+
+			.food {
+				position: absolute;
+				border-radius: 50%;
+				background-color: #00CCFF;
+			}
+
+			.wall{
+				display:block;
+				position:absolute;
+				border-radius: 10px;
+				border-color: #3322FF;
+				border-width: 4px;
+				border-style: solid;
+
+				background-color: #3322FF;
+				overflow: hidden;
+
+				z-index: 0;
+			}
+
+			.innerwall{
+				display: block;
+				position:absolute;
+				border-radius: 7px;
+				background-color: black;
+				z-index: 1;	
+			}
+
+			.win{
+				display:none;
+				flex-flow: column;
+
+				position: absolute;
+				padding: 32px;
+				border-radius: 16px;
+				background-color: #FFAA00;
+				left: 50%;
+				top:50%;
+				
+				transform: translate(-50%,-50%) scale(1.0);
+				z-index: 2;
+				align-items: center;
+				justify-content: center;
+
+				
+				
+			}
+
+			.ali{
+				width: auto;
+				text-align: center;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			@keyframes winshow{
+				from{transform:translate(-50%,-50%) scale(0.0);}
+				to{transform: translate(-50%,-50%) scale(1.0);}
+			}
+
+			@keyframes eat{
+				from{transform: scaleY(1.0);}
+				to{transform: scaleY(0.0);}
+			}
+
+			.buttons{
+				display: flex;
+				position: absolute;
+				width: 99%;
+				margin:0px;
+				top:0px;
+				justify-content: center;
+			}
+
+		</style>
+	</header>
+	<body>
+		<p id = "fps">0 fps</p>
+		<div class="canv" id="room">
+		
+			<div class = "pacman_box" id = "player"><div class = pacman><div class = "pacmouth" id="mouth"></div></div></div>
+
+			<div class = "win" id = "wintab">
+				<div class = "ali"><h1>FIM DE JOGO</h1></div>
+				<div class = "ali"><h2>VOCÊ VENCEU!</h2></div>
+			</div>
+		</div>
+
+
+		<div class = 'buttons'>
+			<img id = "imgleft" src ="left_key.png" draggable="false"/>
+			<img id = "imgright" src ="right_key.png" draggable="false"/>
+			<div style="flex-grow:1;"></div>
+			
+			<img id = "imgdown" src ="down_key.png" draggable="false"/>
+			<img id = "imgup" src ="up_key.png" draggable="false"/>
+		</div>
+		
+
+		
+		
+	
+	<script>
+
+	//observer block
+	let signal = null;
+	function resetSignal(){
+		signal = {event:{type:'none',value:'none'}}
+	}
+
+	resetSignal();
+
+	//Stage Block
+	const room = document.getElementById("room");
+	const room_width = 704;
+	const room_height = 704;
+	const tilesz = 64;
+
+	const tilenumber = {w:11,h:11,i:121}
+
+	room.style.width = room_width;
+	room.style.height = room_height;
+
+	const food_list = [];
+	const walls_list = [];
+
+	const freeway = [];
+
+	for(i=0;i<tilenumber.i;i++){
+		freeway.push(true);
+	}
+
+	function getxy(x,y){
+
+		return Math.abs(x%tilenumber.w) + Math.abs(y%tilenumber.h)*tilenumber.w;
+	}
+
+	function new_food(boxf){
+		let el = document.createElement("div");
+		el.className = "food";
+
+		el.style.top = boxf.y;
+		el.style.left = boxf.x;
+		el.style.height = boxf.h;
+		el.style.width = boxf.w;
+
+		return el;
+	}
+
+	function new_wall(boxf){
+				
+		
+		let el = document.createElement("div");
+		
+		el.className = "wall";
+
+		el.style.top = boxf.y-4;
+		el.style.left = boxf.x-4;
+		el.style.height = boxf.h;
+		el.style.width = boxf.w;
+
+		return el;
+	}
+
+	function new_inner_wall(boxf){
+		let inner = document.createElement("div");
+		inner.className = "innerwall";
+		inner.style.top = boxf.y;
+		inner.style.left = boxf.x;
+		inner.style.height = boxf.h;
+		inner.style.width = boxf.w;
+
+		return inner;
+	}
+
+	class Wall{
+		constructor(room,x,y,w,h){
+			this.box = box(tilesz*x,tilesz*y,tilesz*w,tilesz*h,0);
+			this.domElement = new_wall(this.box);
+			this.domElement2 = new_inner_wall(this.box);
+			room.appendChild(this.domElement);
+			room.appendChild(this.domElement2);
+			
+			for(let i = x;i<(x+w);i++){
+				for(let j = y;j<(y+h);j++){
+					freeway[getxy(i,j)] = false;
+				}
+			}
+		}
+
+		kill(room){
+			room.removeChild(this.domElement);
+			room.removeChild(this.domElement2);
+		}
+
+	}
+
+	class Food{
+		constructor(room,x,y,radius){
+			this.box = boxradius(x,y,radius);
+			this.domElement = new_food(this.box);
+			room.appendChild(this.domElement);
+		}
+
+		kill(room){
+			room.removeChild(this.domElement);
+		}
+	}
+
+	//stage begin
+
+	walls_list.push(new Wall(room,0,0,5,1))
+	walls_list.push(new Wall(room,0,0,1,5))
+	walls_list.push(new Wall(room,6,0,5,1))
+	walls_list.push(new Wall(room,10,0,1,5))
+	walls_list.push(new Wall(room,0,10,5,1))
+	walls_list.push(new Wall(room,0,6,1,5))
+	walls_list.push(new Wall(room,6,10,5,1))
+	walls_list.push(new Wall(room,10,6,1,5))
+	walls_list.push(new Wall(room,2,2,7,1))
+	walls_list.push(new Wall(room,2,2,1,5))
+	walls_list.push(new Wall(room,8,2,1,5))
+	walls_list.push(new Wall(room,4,6,3,1))
+	walls_list.push(new Wall(room,4,4,1,3))
+	walls_list.push(new Wall(room,6,4,1,3))
+	walls_list.push(new Wall(room,2,8,7,1))
+
+	for(let i = 0; i<tilenumber.i;i++){
+		food_list.push(null);
+	}
+
+	let food_number = 0;
+
+	//create Food
+	for(let i = 0;i<tilenumber.w;i++){
+		for(let j = 0; j<tilenumber.h;j++){
+			let xy = getxy(i,j);
+			if(freeway[xy]){
+				food_list[xy] = new Food(room,i*64+32,j*64+32,10);
+				food_number++;
+			}
+		}
+	}
+
+	//collision detection
+	function box(left,top,width,height,margin){
+		return {x:(left+margin),y:(top+margin),w:(width-margin),h:(height-margin)}
+	}
+
+	function boxradius(left,top,radius){
+		return {x:left-radius*0.5,y:top-radius*0.5,w:radius,h:radius}
+	}
+
+	function isColliding(boxa,boxb){
+
+	}
+
+	//player Block
+	const player = document.getElementById("player");
+	const mouth = document.getElementById("mouth");
+	const player_speed = 5
+	let player_pos = {x:64*5,y:64*5};
+	let player_rot = 0;
+	const player_box_shape = box(0,0,50,50,10)
+	const player_box = box(0,0,50,50,10)
+
+	function player_warp(w,h){
+
+		if(player_pos.x > (w-10)){
+			player_pos.x = -39.0;
+		}
+
+		if(player_pos.y > (h-10)){
+			player_pos.y = -39;
+		}
+
+		if (player_pos.x < -40){
+			player_pos.x = w-10;
+		}
+
+		if (player_pos.y < -40){
+			player_pos.y = h-10;
+		}
+	}
+
+	function linear_interpolation(a,b,t){
+		return a+(b-a)*t;
+	}
+
+	function snap_player(w,h){
+		 
+		let x = (player_pos.x+25)/w;
+		let y = (player_pos.y+25)/h;
+		let xx = Math.round(x);
+		let yy = Math.round(y);
+
+		if(Math.abs(x-xx) > 0.01 ){
+			player_pos.x = linear_interpolation(player_pos.x,xx*64,0.1);
+		}
+
+		if(Math.abs(y-yy) > 0.01 ){
+			player_pos.y = linear_interpolation(player_pos.y,yy*64,0.1);
+		}
+	}
+
+	function snap_player_y(h){
+		let y = (player_pos.y)/h;
+		let yy = Math.round(y);
+
+		if(Math.abs(y-yy) > 0.01 ){
+			player_pos.y = linear_interpolation(player_pos.y,yy*h,0.3333);
+		}
+	}
+
+	function snap_player_x(h){
+		let x = (player_pos.x)/h;
+		let xx = Math.round(x);
+
+		if(Math.abs(x-xx) > 0.01 ){
+			player_pos.x = linear_interpolation(player_pos.x,xx*h,0.3333);
+		}
+	}
+
+	function player_box_update(){
+		player_box.x = player_box_shape.x + player_pos.x;
+		player_box.w = player_box_shape.w + player_pos.x;
+		player_box.y = player_box_shape.y + player_pos.x;
+		player_box.h = player_box_shape.h + player_pos.x;
+	}
+
+	function player_getCurrentCell(){
+		return {x:Math.round(player_pos.x/tilesz),y:Math.round(player_pos.y/tilesz)};
+	}
+
+	function player_process(delta){
+		
+		if (signal.event.type == "keydown"){
+			mouth.style.animation = "eat 0.15s linear 0s infinite alternate";
+			let cc = player_getCurrentCell();
+
+			if(signal.event.value == "ArrowRight"){
+				player_rot = "0turn";
+				if(freeway[getxy(cc.x+1,cc.y)]){
+					player_pos.x += player_speed;
+					snap_player_y(64);
+				}else{
+					snap_player_x(64);
+				}
+			}
+
+			if(signal.event.value == "ArrowLeft"){
+				player_rot = "0.5turn";
+				if(freeway[getxy(cc.x-1,cc.y)]){
+					player_pos.x -= player_speed;
+					snap_player_y(64);
+				}else{
+					snap_player_x(64);
+				}
+			}
+
+			if (signal.event.value == "ArrowUp"){
+				player_rot = "0.75turn";
+				if(freeway[getxy(cc.x,cc.y-1)]){
+					player_pos.y -= player_speed;
+					snap_player_x(64);
+				}else{
+					snap_player_y(64);
+				}
+			}
+
+			if (signal.event.value == "ArrowDown"){
+				player_rot = "0.25turn";
+				if(freeway[getxy(cc.x,cc.y+1)]){
+					player_pos.y += player_speed;
+					snap_player_x(64);
+				}else{
+					snap_player_y(64);
+				}
+			}
+
+			let pxy = getxy(cc.x,cc.y);
+			if(food_list[pxy] != null){
+				food_list[pxy].kill(room);
+				food_list[pxy] = null;
+				food_number--;
+			}
+		}
+
+		if(signal.event.type == "keyup"){
+			mouth.style.animation = "none";
+		}
+
+		player_box_update();
+		player_warp(room_width,room_height)
+		player.style.transform = "translate(" + player_pos.x.toString() + "px," + player_pos.y.toString() + "px) rotate("+player_rot+")";
+	}
+
+
+
+	//Controller Block
+	document.addEventListener('keydown', (event) =>{
+		signal.event.type = 'keydown';
+		signal.event.value = event.key;
+		if(event.key == "ArrowUp" || event.key == "ArrowDown"){
+			event.view.event.preventDefault();
+		}
+	}
+	);
+
+	document.addEventListener('keyup', (event) =>{
+		signal.event.type = "keyup";
+		signal.event.value = event.key;
+	}
+	);
+
+	document.getElementById("imgleft").addEventListener('mousedown',(event)=>{
+		signal.event.type = "keydown";
+		signal.event.value = "ArrowLeft";
+	})
+
+	document.getElementById("imgleft").addEventListener('mouseup',(event)=>{
+		signal.event.type = "keyup";
+		signal.event.value = "ArrowLeft";
+	})
+
+
+	document.getElementById("imgright").addEventListener('mousedown',(event)=>{
+		signal.event.type = "keydown";
+		signal.event.value = "ArrowRight";
+	})
+
+	document.getElementById("imgright").addEventListener('mouseup',(event)=>{
+		signal.event.type = "keyup";
+		signal.event.value = "ArrowRight";
+	})
+
+	document.getElementById("imgup").addEventListener('mousedown',(event)=>{
+		signal.event.type = "keydown";
+		signal.event.value = "ArrowUp";
+	})
+
+	document.getElementById("imgup").addEventListener('mouseup',(event)=>{
+		signal.event.type = "keyup";
+		signal.event.value = "ArrowUp";
+	})
+
+	document.getElementById("imgdown").addEventListener('mousedown',(event)=>{
+		signal.event.type = "keydown";
+		signal.event.value = "ArrowDown";
+	})
+
+	document.getElementById("imgdown").addEventListener('mouseup',(event)=>{
+		signal.event.type = "keyup";
+		signal.event.value = "ArrowDown";
+	})
+
+	document.addEventListener('mouseup',(event)=>{
+		signal.event.type = "keyup";
+		signal.event.value = "ArrowDown";
+	})
+	
+
+	//Game Loop Block
+	let delta_time = Date.now()
+	const frametime = 1000/60; //30fps
+
+	const Game = setInterval(Process,frametime);
+
+	function Process(){
+		let now = Date.now();
+		let dt = (now-delta_time)/frametime;
+		//document.getElementById("fps").innerHTML = (1000/(now-delta_time)).toString() + " fps";
+		player_process(1.0);
+
+		if(food_number < 1){
+			let wintab = document.getElementById("wintab");
+			wintab.style.display = "flex";
+			wintab.style.animation = "winshow 0.34s ease-out"
+			clearInterval(Game)
+			return;
+		}
+
+		delta_time = now;
+	}
+	
+
+	
+	
+	</script>
+	</body>
+</html>
