@@ -464,51 +464,51 @@
 	}
 	);
 
-	document.getElementById("imgleft").addEventListener('mousedown',(event)=>{
+	document.getElementById("imgleft").onpointerdown  = (event)=>{
 		signal.event.type = "keydown";
 		signal.event.value = "ArrowLeft";
-	})
+	}
 
-	document.getElementById("imgleft").addEventListener('mouseup',(event)=>{
+	document.getElementById("imgleft").onpointerup = (event)=>{
 		signal.event.type = "keyup";
 		signal.event.value = "ArrowLeft";
-	})
+	}
 
 
-	document.getElementById("imgright").addEventListener('mousedown',(event)=>{
+	document.getElementById("imgright").onpointerdown = (event)=>{
 		signal.event.type = "keydown";
 		signal.event.value = "ArrowRight";
-	})
+	}
 
-	document.getElementById("imgright").addEventListener('mouseup',(event)=>{
+	document.getElementById("imgright").onpointerup = (event)=>{
 		signal.event.type = "keyup";
 		signal.event.value = "ArrowRight";
-	})
+	}
 
-	document.getElementById("imgup").addEventListener('mousedown',(event)=>{
+	document.getElementById("imgup").onpointerdown = (event)=>{
 		signal.event.type = "keydown";
 		signal.event.value = "ArrowUp";
-	})
+	}
 
-	document.getElementById("imgup").addEventListener('mouseup',(event)=>{
+	document.getElementById("imgup").onpointerup = (event)=>{
 		signal.event.type = "keyup";
 		signal.event.value = "ArrowUp";
-	})
+	}
 
-	document.getElementById("imgdown").addEventListener('mousedown',(event)=>{
+	document.getElementById("imgdown").onpointerdown = (event)=>{
 		signal.event.type = "keydown";
 		signal.event.value = "ArrowDown";
-	})
+	}
 
-	document.getElementById("imgdown").addEventListener('mouseup',(event)=>{
+	document.getElementById("imgdown").onpointerup = (event)=>{
 		signal.event.type = "keyup";
 		signal.event.value = "ArrowDown";
-	})
+	}
 
-	document.addEventListener('mouseup',(event)=>{
+	document.onpointerup = (event)=>{
 		signal.event.type = "keyup";
 		signal.event.value = "ArrowDown";
-	})
+	}
 	
 
 	//Game Loop Block

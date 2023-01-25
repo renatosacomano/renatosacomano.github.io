@@ -7,6 +7,7 @@
     --noteheight:400px;
 
     --colora: #000811;
+    --backcolor: #5555AA;
     --colorb: #253344AA;
     --fontcolor:white;
     --fontcolor2:black;
@@ -27,7 +28,7 @@ body{
     color: var(--fontcolor);
     font-size: 1em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: var(--colora);
+    background-color: var(--backcolor);
     background-image: url(images/spaceTile.png);
     background-size: 256px;
     background-repeat: repeat;
@@ -52,7 +53,6 @@ p{
     text-align: justify;
     text-indent: 3em;
     margin-block-start: 1em;
-    
 }
 
 
