@@ -510,6 +510,11 @@
 		signal.event.value = "ArrowDown";
 	}
 	
+	window.oncontextmenu =(event)=>{
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+	}
 
 	//Game Loop Block
 	let delta_time = Date.now()
