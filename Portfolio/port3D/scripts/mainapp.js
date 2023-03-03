@@ -80,7 +80,7 @@ function model(name,x,y,z){
     return new modelConf(name,x,y,z);
 }
 
-let modelList = [model('soda.gltf',0,0,35),model('beetle.gltf',0,-0.5,15),model('crow.gltf',0.5,1,15),model('lowPoly.gltf',0,-0.5,6),model('Vaso.gltf',0,0.5,5)];
+let modelList = [model('Soda.gltf',0,0,35),model('beetle.gltf',0,-0.5,15),model('crow.gltf',0.5,1,15),model('LowPoly.gltf',0,-0.5,6),model('Vaso.gltf',0,0.5,5)];
 
 let model_transform = model('none',0,0,0);
 
