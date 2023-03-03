@@ -302,6 +302,11 @@ iframe{
     border: none;
 }
 
+.secimage{
+    margin:2em;
+    border-radius: 2em;
+}
+
 
 @media(min-width:800px){
 
