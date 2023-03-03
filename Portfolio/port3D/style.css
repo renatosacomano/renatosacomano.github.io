@@ -6,7 +6,7 @@
     position:fixed;
     top:50%;
     left: 50%;
-    transform: translate(-50%,-50%) scale(50%);
+    transform: translate(-50%,-50%) scale(33%);
     border: 64px solid black;
 }
 
@@ -67,6 +67,25 @@ img{
     width: 128px;
     height: 128px;
     margin: 5px;
+}
+
+@media(min-width:500px){
+    #cvHolder{
+        background-image: url(texturas/transp_back.png);
+        background-repeat: repeat;
+        background-size: 16px;
+        position:fixed;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%) scale(50%);
+    }
+
+    .hdri_pool{
+        display: flex;
+        justify-content: center;
+        z-index: 1;
+        transform: scale(75%) translate(0,-148px);
+    }
 }
 
 @media(min-width:800px){

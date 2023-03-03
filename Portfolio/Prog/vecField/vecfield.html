@@ -16,7 +16,7 @@
             display: block;
             top: 50%;
             left:50%;
-            transform:translate(-50%,-50%);
+            transform:translate(-50%,-50%) scale(40%);
         }
 
         button{
@@ -83,6 +83,25 @@
         #credits{
             text-align: center;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        @media (orientation:landscape){
+            .center{
+            position:absolute;
+            display: block;
+            top: 50%;
+            left:50%;
+            transform:translate(-50%,-50%) scale(50%);
+        }
+
+        @media (min-width:800px) and (min-height:600px){
+            .center{
+            position:absolute;
+            display: block;
+            top: 50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
         }
 
     </style>

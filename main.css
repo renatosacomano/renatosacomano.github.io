@@ -67,6 +67,7 @@ p{
     top:0;
     left:0;
     margin:5px;
+    z-index: 20;
 }
 
 
@@ -85,18 +86,15 @@ p{
 }
 
 .header{
-    position: fixed;
     display: flex;
-    top:0px;
     min-height: 2em;
-    padding: 1em;
     border-bottom-left-radius: 5em;
     border-bottom-right-radius:5em ;
     justify-content: flex-end;
     align-items: flex-end;
-    margin-bottom: 1em;
-    z-index: 2;
-    background-color: #000811DD;
+    margin-bottom: 0.25em;
+    margin-top: 0.5em;
+    
 }
 
 .headerPadding{
