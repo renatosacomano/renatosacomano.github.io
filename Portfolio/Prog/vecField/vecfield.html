@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+        
+        .center{
+            position:absolute;
+            display: block;
+            top: 50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+
+        button{
+            padding: 0.5em;
+            margin: 5px;
+            background-color: gray;
+            min-width: 100px;
+            
+            border-left: 3px solid white;
+            border-right: 3px solid black;
+            border-top: 3px solid white;
+            border-bottom: 3px solid black;
+            border-radius: 0.5em;
+            font-weight: bold;
+            
+        }
+
+        button:active{
+            border-left: 3px solid black;
+            border-right: 3px solid white;
+            border-top: 3px solid black;
+            border-bottom: 3px solid white;
+            background-color: #343434;
+        }
+
+        #info{
+            text-align: center;
+            padding: 5px;
+            overflow-wrap: normal;
+            color: #FFFFFF;
+            background-color: #343434;
+            font-size: larger;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        img{
+            display: none;
+        }
+
+        .vertical{
+            display: flex;
+            flex-direction: column;
+            max-width: 100px;
+        }
+
+        .vertical label{
+            text-align: center;
+        }
+
+        .horizontal{
+            display: flex;
+            background-color: #343434;
+            align-items: center;
+            
+        }
+
+        select{
+            padding: 0.5em;
+            margin: 15px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #credits{
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class = 'center'>
+        <div class="horizontal">
+            <button onclick="ref_mode()" id ="ref_bt">Force mode</button>
+            <button onclick="flow_mode()" id = "flow_bt">Boat Mode</button>
+            <button onclick="clear_all()">Clear all</button>
+            <input type="checkbox" id = "normaChk" value="norma"/><label for="normaChk">Normalized Vectors</label>
+            <div class = 'vertical'><label for="mainforce">Main Force Angle</label><input type="range" min="-360" max="360" id = 'mainforce' value="0"></div>
+            <select id="samples" onchange="SampleChoose(value)">
+                <option id ='selsample' disabled>---- Sample 1 ----</option>
+                <hr>
+                <option>Sample 1</option>
+                <option>Sample 2</option>
+                <option>Sample 3</option>
+            </select>
+            
+        </div>
+
+    <canvas id = "cv" width = "800" height="600"></canvas>
+    <div id = 'info'>Force Mode: Draw on the canvas to create force vectors to influence the stream.</div>
+
+    <div id = 'credits'>Vector Field Simulation by Renato Sacomano da Cruz</div>
+    </div>
+
+    <img id = 'boat' src = "PaperBoat.png"/>
+
+    <script src="vectorField.js"></script>
+</body>
+</html>

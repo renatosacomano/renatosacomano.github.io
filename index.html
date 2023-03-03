@@ -19,8 +19,7 @@
                 <div class ="section color2">
                     <div class = "header boxMax">
                         <a class = "headerItem" href="#sobre">Sobre</a>
-                        <a class = "headerItem">Contato</a>
-                        <a class = "headerItem">Jogos</a>
+                        <a class = "headerItem" href="#contato">Contato</a>
                         <a class = "headerPortrait" href="index.html"><img src="images/Euquad.jpg" title="Renato Sacomano da Cruz"/></a>
                         
                     </div>
@@ -38,8 +37,8 @@
             <section class="section">
                 <div class = "boxMin horizontalContainer boxMax">
                     <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/banner3d.jpg" title="banner"/><div class="FloatingBoxTxt">Modelos 3D para qualquer projeto.</div><a class ="linkbt" href = "javascript:show(0)">Abrir Galeria 3D</a></div></div>
-                    <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/bannerjs.jpg" title="banner"/><div class="FloatingBoxTxt">Desenvolvimento de scripts e aplicações<br>Python, javascript, C ou Rust.</div><a class ="linkbt" href>Veja o Portfólio</a></div></div>
-                    <div class = "FloatingBox"><div class = "FloatingBoxDiv">conteúdo</div></div>
+                    <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/bannerjs.jpg" title="banner"/><div class="FloatingBoxTxt">Desenvolvimento de scripts e aplicações<br>Python, javascript, C ou Rust.</div><a class ="linkbt" href = "javascript:show(1)">Veja o Portfólio</a></div></div>
+                    <div class = "FloatingBox"><div class = "FloatingBoxDiv"><img class="FloatingBoxImg" src="images/bannerJogos.jpg" title="banner"/><div class="FloatingBoxTxt">Confira os demos das Game Jams<br>Disponíveis Gratuitamente:</div><a class ="linkbt" href = "https://renatodacruz.itch.io/">Itch.io</a></div></div>
                     
                 </div>
             </section>
@@ -55,6 +54,13 @@
                 </div>
             </section>
 
+            <section class = "section" id="contato">
+                <div class = "boxMax boxMargin">
+                    <h1>Contato</h1>
+                    <div>e-mail: <a href="mailto:renatosacomanodacruz@gmail.com">renatosacomanodacruz@gmail.com</a></div>
+                </div>
+            </section>
+
             
             
         </div>
@@ -67,10 +73,12 @@
             let popups = document.getElementsByClassName('popup');
 
 
+            popups_links = ["Portfolio/port3D/index.html","Portfolio/Prog/vecField/vecfield.html"]
+
             function show(id){
-                popups[id].style.display = 'block';
-                popups[id].style.animation = 'popupshow 0.45s linear';
-                popups[id].children[0].src = "http://localhost:8000";
+                popups[0].style.display = 'block';
+                popups[0].style.animation = 'popupshow 0.45s linear';
+                popups[0].children[0].src = popups_links[id];
             }
 
             function close(id){

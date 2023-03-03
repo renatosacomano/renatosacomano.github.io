@@ -85,12 +85,18 @@ p{
 }
 
 .header{
+    position: fixed;
     display: flex;
+    top:0px;
     min-height: 2em;
-    margin-top: 1em;
+    padding: 1em;
+    border-bottom-left-radius: 5em;
+    border-bottom-right-radius:5em ;
     justify-content: flex-end;
     align-items: flex-end;
     margin-bottom: 1em;
+    z-index: 2;
+    background-color: #000811DD;
 }
 
 .headerPadding{

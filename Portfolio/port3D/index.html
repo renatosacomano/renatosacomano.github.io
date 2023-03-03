@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3D scene render</title>
+        <link rel="stylesheet" type = "text/css" href = "style.css" media="screen"/>
+    </head>
+    <body>
+
+        <div id = "cvHolder">
+            <a href="javascript:loadNext(true)"><div class="seta"></div></a>
+            <a href="javascript:loadNext(false)"><div class="seta rotated"></div></a>
+            
+            <div class = "hdri_pool">
+                <a href = "javascript:loadEnv('inner.exr')"><img src="texturas/hdri_in.png"></a>
+                <a href = "javascript:loadEnv('out.exr')"><img src="texturas/hdri_out.png"></a>
+                <a href = "javascript:loadEnv('natural.exr')"><img src="texturas/hdri_natural.png"></a>
+                <a href = "javascript:loadEnv('cellar.exr')"><img src="texturas/hdri_indark.png"></a>
+                <a href = "javascript:loadEnv('night.exr')"><img src="texturas/hdri_night.png"></a>
+            </div>
+        </div>
+        <div id="err">Oops... Ocorreu um erro!</div>
+
+        <script src="scripts/three.js"></script>
+        <script src = "scripts/GLTFLoader.js"></script>
+        <script src = "scripts/EXRLoader.js"></script>
+        <script src = "scripts/OrbitControls.js"></script>
+        <script src = "scripts/OutlineEffect.js"></script>
+        <script src="scripts/mainapp.js"></script>
+    </body>
+</html>
